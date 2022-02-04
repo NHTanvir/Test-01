@@ -33,13 +33,13 @@ add_action( 'woocommerce_after_add_to_cart_button', 'custom_input_action_woocomm
 
 //setting cookie 
 
-function tttttt() {
+function custom_input_function() {
 
 	if( ! isset( $_POST['custom_name'] ) ) return;
 		setcookie( 'custom_name', sanitize_text_field( $_POST['custom_name'] ), time() + 3600, COOKIEPATH, COOKIE_DOMAIN );
 
 }
-add_action('init', 'tttttt');
+add_action('init', 'custom_input_function');
 
 
 //printing cookie at cart page
@@ -74,7 +74,7 @@ function action_woocommerce_thankyou( $order_get_id ){
 		global $wpdb;
 		$key = 'I am meta';
 		$value = $_COOKIE["custom_name"];
-		wc_update_order_item_meta($order_get_id, $key, $value);
+		wc_update_order_item_meta( $order_get_id, $key, $value );
 		// remove cookie
 		unset( $_COOKIE['custom_name'] ); 
     	setcookie( 'custom_name', '', time() - ( 15 * 60 ), COOKIEPATH, COOKIE_DOMAIN );
